@@ -75,6 +75,7 @@ body {
 	padding: 70px 0;
 	width: 600px;
 	margin: 0px auto;
+	min-height: 410px;
 	@media (max-width: 767px) {
 		width: 100%;
 		padding: 50px 15px;
@@ -352,5 +353,26 @@ body {
 	span {
 		display: block;
 		font-size: 16px;
+	}
+}
+.footer_area {
+	background: $textColor;
+	padding: 20px 15px;
+}
+.footer_menu {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	li {
+		margin-right: 25px;
+		a {
+			color: #fff;
+			&:hover {
+				color: $themeColor;
+			}
+		}
+		&:last-child {
+			margin-right: 0;
+		}
 	}
 }

@@ -44,6 +44,11 @@
 				<!-- <a href="index.html" class="submit_btn">Start again</a> -->
 			</div>
 		</div>
+		<footer class="footer_area">
+			<ul class="footer_menu">
+				<li><a href="student.html">Student Details</a></li>
+			</ul>
+		</footer>
 		<button class="scroll_up" onclick='window.scrollTo({top: 0, behavior: "smooth"});'>Top</button>
 
 		<script src="assets/js/jquery-3.2.1.min.js"></script>
@@ -363,9 +368,7 @@
 					],
 				},
 			];
-			let answerList = [
-
-			]
+			let answerList = [];
 			let question_html = '';
 			$.each(question_items, function (i, qsdata) {
 				let index = i + 1;
@@ -381,15 +384,13 @@
 							<label for="${option.value}">${option.name}</label>
 						</li>`;
 				});
-				return (
-					`<div class="quiz_wrap">
+				return `<div class="quiz_wrap">
 						<h4>
 							<span class="label">${index}</span>
 							${qsdata.title}
 						</h4>
 						<ul class="quiz_ansr-list">${optionsHtml}</ul>
-					</div>`
-				);
+					</div>`;
 			}
 		</script>
 	</body>
