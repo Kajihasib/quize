@@ -48,7 +48,7 @@
 							</div>
 							<button id="submit_btn">Start Quiz</button>
 						</div>
-						<div id="start_quize" class="start_quize_wrap">
+						<div id="start_quize" class="start_quize_wrap d-none">
 							<div class="start_quize-top">
 								<h3>10 Quiz Questions:</h3>
 								<span><span id="time">0:00 </span> Minute </span>
@@ -66,12 +66,14 @@
 				if (name.val() === '') {
 					name.addClass('error');
 					$('#error_message').text('name can not be empty').show();
-					let oneMinutes = 60 * 1,
-						display = document.querySelector('#time');
-					startTimer(oneMinutes, display);
 				} else {
 					name.removeClass('error');
 					$('#error_message').hide();
+					let oneMinutes = 60 * 1,
+						display = document.querySelector('#time');
+					startTimer(oneMinutes, display);
+					$('#start_quize').addClass('d-block').removeClass('d-none');
+					$('.quiz_form').addClass('d-none');
 				}
 			});
 
