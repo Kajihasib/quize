@@ -361,6 +361,9 @@
 					],
 				},
 			];
+			let answerList = [
+
+			]
 			let question_html = '';
 			$.each(question_items, function (i, qsdata) {
 				let index = i + 1;
@@ -371,28 +374,19 @@
 				$.each(qsdata.answer, function (key, option) {
 					optionsHtml =
 						optionsHtml +
-						'									<li>' +
-						'										<input type="radio" id="' +
-						option.value +
-						'" name="radio-group" />' +
-						'										<label for="' +
-						option.value +
-						'">' +
-						option.name +
-						'</label>' +
-						'									</li>';
+						`<li>
+							<input type="radio" id="${option.value}" name="radio-group" />
+							<label for="${option.value}">${option.name}</label>
+						</li>`;
 				});
 				return (
-					'<div class="quiz_wrap">' +
-					'								<h4><span class="label">' +
-					index +
-					'</span>' +
-					qsdata.title +
-					'</h4>' +
-					'								<ul class="quiz_ansr-list">' +
-					optionsHtml +
-					'								</ul>' +
-					'							</div>'
+					`<div class="quiz_wrap">
+						<h4>
+							<span class="label">${index}</span>
+							${qsdata.title}
+						</h4>
+						<ul class="quiz_ansr-list">${optionsHtml}</ul>
+					</div>`
 				);
 			}
 		</script>
