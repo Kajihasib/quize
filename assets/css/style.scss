@@ -238,3 +238,21 @@ body {
 		color: $themeColor;
 	}
 }
+.scroll_up {
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+	min-width: 35px;
+	min-height: 35px;
+	background: $themeColor;
+	color: #fff;
+	border: 2px solid $themeColor;
+	border-radius: 3px;
+	&:focus {
+		outline: none;
+	}
+	&:hover {
+		background: transparent;
+		color: $themeColor;
+	}
+}
