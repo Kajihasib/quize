@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Quiz</title>
+		<link rel="stylesheet" href="assets/css/material-grid.css" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+	</head>
+	<body>
+		<!-- header area start  -->
+		<header class="header_area">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-4">
+						<a class="logo" href="index.html">
+							<img src="assets/images/logo.png" alt="logo" />
+						</a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- header area end  -->
+		<div class="hero_area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 offset-lg-3">
+						<div class="hero_container">
+							<h1>Football Quiz</h1>
+							<p>
+								Love football as much as we do? Then take this quiz to test your knowledge! Make sure to
+								read the rulebook before you start
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="quiz_area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 offset-lg-3">
+						<div class="quiz_form">
+							<div class="input_field">
+								<input id="name" type="text" placeholder="Enter your name to start" />
+								<p id="error_message"></p>
+							</div>
+							<button id="submit_btn">Start Quiz</button>
+						</div>
+						<div id="start_quize" class="start_quize_wrap">
+							<div class="start_quize-top">
+								<h3>10 Quiz Questions:</h3>
+								<span><span id="time">0:00 </span> Minute </span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="assets/js/jquery-3.2.1.min.js"></script>
+		<script>
+			$('#submit_btn').on('click', function () {
+				let name = $('#name');
+				$('#error_message').hide();
+				if (name.val() === '') {
+					name.addClass('error');
+					$('#error_message').text('name can not be empty').show();
+					let oneMinutes = 60 * 1,
+						display = document.querySelector('#time');
+					startTimer(oneMinutes, display);
+				} else {
+					name.removeClass('error');
+					$('#error_message').hide();
+				}
+			});
+
+			function startTimer(duration, display) {
+				let timer = duration,
+					minutes,
+					seconds;
+				setInterval(function () {
+					minutes = parseInt(timer / 60, 10);
+					seconds = parseInt(timer % 60, 10);
+
+					minutes = minutes < 10 ? '0' + minutes : minutes;
+					seconds = seconds < 10 ? '0' + seconds : seconds;
+
+					display.textContent = minutes + ':' + seconds;
+
+					if (--timer < 0) {
+						timer = duration;
+					}
+				}, 1000);
+			}
+
+			let question_items = [
+				{
+					id: 1,
+					title: 'many minutes are in a full game of football?',
+					correct_answer: '90_minutes',
+					answer: [
+						{
+							id: 1,
+							value: '45_minutes',
+							name: '45 Minutes',
+						},
+						{
+							id: 2,
+							value: '60_minutes',
+							name: '60 Minutes',
+						},
+						{
+							id: 3,
+							value: '90_minutes',
+							name: '90 Minutes',
+						},
+						{
+							id: 4,
+							value: '100_minutes',
+							name: '100 Minutes',
+						},
+					],
+				},
+				{
+					id: 2,
+					title: 'How many teams are in the Premier League?',
+					correct_answer: '20_teams',
+					answer: [
+						{
+							id: 1,
+							value: '20_teams',
+							name: '20 Teams',
+						},
+						{
+							id: 2,
+							value: '22_teams',
+							name: '22 Teams',
+						},
+						{
+							id: 3,
+							value: '24_teams',
+							name: '24 Teams',
+						},
+						{
+							id: 4,
+							value: '26_teams',
+							name: '26 Teams',
+						},
+					],
+				},
+				{
+					id: 3,
+					title: 'Who is the all-time top scorer in the Premier League?',
+					correct_answer: 'alan_shearer',
+					answer: [
+						{
+							id: 1,
+							value: 'sergio_aguero',
+							name: 'Sergio Aguero',
+						},
+						{
+							id: 2,
+							value: 'cristiano_ronaldo',
+							name: 'Cristiano Ronaldo',
+						},
+						{
+							id: 3,
+							value: 'thierry_henry',
+							name: 'Thierry Henry',
+						},
+						{
+							id: 4,
+							value: 'alan_shearer',
+							name: 'Alan Shearer',
+						},
+					],
+				},
+				{
+					id: 4,
+					title: 'Which team one of the 2019/20 Premier League title?',
+					correct_answer: 'liverpool',
+					answer: [
+						{
+							id: 1,
+							value: 'chelsea',
+							name: 'Chelsea',
+						},
+						{
+							id: 2,
+							value: 'manchester_city',
+							name: 'Manchester City',
+						},
+						{
+							id: 3,
+							value: 'liverpool',
+							name: 'Liverpool',
+						},
+						{
+							id: 4,
+							value: 'manchester_united',
+							name: 'Manchester United',
+						},
+					],
+				},
+				{
+					id: 5,
+					title: 'Which country won the first ever World Cup in 1930?',
+					correct_answer: 'uruguay',
+					answer: [
+						{
+							id: 1,
+							value: 'England',
+							name: 'england',
+						},
+						{
+							id: 2,
+							value: 'brazil',
+							name: 'Brazil',
+						},
+						{
+							id: 3,
+							value: 'France',
+							name: 'france',
+						},
+						{
+							id: 4,
+							value: 'uruguay',
+							name: 'Uruguay',
+						},
+					],
+				},
+				{
+					id: 6,
+					title: 'Which country hosted the 2014 World Cup?',
+					correct_answer: 'brazil',
+					answer: [
+						{
+							id: 2,
+							value: 'brazil',
+							name: 'Brazil',
+						},
+						{
+							id: 1,
+							value: 'Russia',
+							name: 'russia',
+						},
+						{
+							id: 3,
+							value: 'South Africa',
+							name: 'south_africa',
+						},
+						{
+							id: 4,
+							value: 'uruguay',
+							name: 'Uruguay',
+						},
+					],
+				},
+				{
+					id: 7,
+					title: 'Which country won the 2018 World Cup?',
+					correct_answer: 'france',
+					answer: [
+						{
+							id: 2,
+							value: 'brazil',
+							name: 'Brazil',
+						},
+						{
+							id: 1,
+							value: 'Portugal',
+							name: 'portugal',
+						},
+						{
+							id: 3,
+							value: 'England',
+							name: 'england',
+						},
+						{
+							id: 4,
+							value: 'france ',
+							name: 'France',
+						},
+					],
+				},
+				{
+					id: 8,
+					title: 'Which club has won the Champions League titles?',
+					correct_answer: 'real_madrid',
+					answer: [
+						{
+							id: 2,
+							value: 'manchester_united',
+							name: 'Manchester United',
+						},
+						{
+							id: 1,
+							value: 'real_madrid',
+							name: 'Real Madrid',
+						},
+						{
+							id: 3,
+							value: 'barcelona',
+							name: 'Barcelona',
+						},
+						{
+							id: 4,
+							value: 'bayern_munich',
+							name: 'Bayern Munich ',
+						},
+					],
+				},
+				{
+					id: 9,
+					title: 'Which football player has the biggest following on Instagram?',
+					correct_answer: 'cristiano_ronaldo',
+					answer: [
+						{
+							id: 2,
+							value: 'lionel_messi',
+							name: 'Lionel Messi',
+						},
+						{
+							id: 1,
+							value: 'neymar',
+							name: 'Neymar',
+						},
+						{
+							id: 3,
+							value: 'eden_hazard',
+							name: 'Eden Hazard',
+						},
+						{
+							id: 4,
+							value: 'cristiano_ronaldo',
+							name: 'Cristiano Ronaldo ',
+						},
+					],
+				},
+				{
+					id: 9,
+					title: 'Which football team does Zlatan Ibrahimović currently play for?',
+					correct_answer: 'ac_milan',
+					answer: [
+						{
+							id: 2,
+							value: 'ac_milan',
+							name: 'AC Milan',
+						},
+						{
+							id: 1,
+							value: 'manchester_united',
+							name: 'Manchester United',
+						},
+						{
+							id: 3,
+							value: 'juventus ',
+							name: 'Juventus ',
+						},
+						{
+							id: 4,
+							value: 'barcelona',
+							name: 'Barcelona',
+						},
+					],
+				},
+			];
+			let question_html = '';
+			$.each(question_items, function (i, qsdata) {
+				let index = i + 1;
+				$('#start_quize').append(getQuestion(qsdata, index));
+			});
+			function getQuestion(qsdata, index) {
+				let optionsHtml = '';
+				$.each(qsdata.answer, function (key, option) {
+					optionsHtml =
+						optionsHtml +
+						'									<li>' +
+						'										<input type="radio" id="' +
+						option.value +
+						'" name="radio-group" />' +
+						'										<label for="' +
+						option.value +
+						'">' +
+						option.name +
+						'</label>' +
+						'									</li>';
+				});
+				return (
+					'<div class="quiz_wrap">' +
+					'								<h4><span class="label">' +
+					index +
+					'</span>' +
+					qsdata.title +
+					'</h4>' +
+					'								<ul class="quiz_ansr-list">' +
+					optionsHtml +
+					'								</ul>' +
+					'							</div>'
+				);
+			}
+		</script>
+	</body>
+</html>
