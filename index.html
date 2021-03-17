@@ -381,8 +381,8 @@
 					optionsHtml =
 						optionsHtml +
 						`<li onclick="getRadioValue(${index}, '${option.value}')">
-							<input type="radio" id="${option.value}" name="${index}" />
-							<label for="${option.value}">${option.name}</label>
+							<input type="radio" id="${index}" name="${index}" />
+							<label for="${index}">${option.name}</label>
 						</li>`;
 				});
 				return `<div class="quiz_wrap">
