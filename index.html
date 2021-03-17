@@ -54,28 +54,37 @@
 
 		<script src="assets/js/jquery-3.2.1.min.js"></script>
 		<script>
+			// Hiding Question And Result Section
 			$('.start_quize_wrap').hide();
 			$('.quiz_result').hide();
 
+			// When Click Start Quiz Then fire this function
 			$('#submit_btn').on('click', function () {
 				let name = $('#name');
 				$('#error_message').hide();
+				// if name input empty, show error msg
 				if (name.val() === '') {
 					name.addClass('error');
 					$('#error_message').text('name can not be empty').show();
 				} else {
 					name.removeClass('error');
 					$('#error_message').hide();
+					// starting Time
 					let oneMinutes = 60 * 1,
 						display = document.querySelector('#time');
 					startTimer(oneMinutes, display);
+					// Hiding name section and question section showing
 					$('.start_quize_wrap').show();
 					$('.quiz_form').hide();
 				}
 			});
+
+			// when click submit quiz then fire this question
 			$('#submit_quiz').on('click', function () {
 				onTimeFinish()
 			});
+
+			// Time Controlling function
 			function startTimer(duration, display) {
 				let timer = duration,
 					minutes,
@@ -90,12 +99,14 @@
 					display.textContent = minutes + ':' + seconds;
 
 					if (--timer < 0) {
+						//after finishing time
 						onTimeFinish();
 						clearInterval(intervalINT)
 					}
 				}, 1000);
 			}
 
+			// Question List
 			let question_items = [
 				{
 					id: 1,
@@ -131,12 +142,12 @@
 					answer: [
 						{
 							id: 1,
-							value: '20_teams',
+							value: 'teams20',
 							name: '20 Teams',
 						},
 						{
 							id: 2,
-							value: 'teams20',
+							value: 'teams22',
 							name: '22 Teams',
 						},
 						{
@@ -212,8 +223,8 @@
 					answer: [
 						{
 							id: 1,
-							value: 'England',
-							name: 'england',
+							value: 'england',
+							name: 'England',
 						},
 						{
 							id: 2,
@@ -222,8 +233,8 @@
 						},
 						{
 							id: 3,
-							value: 'France',
-							name: 'france',
+							value: 'france',
+							name: 'France',
 						},
 						{
 							id: 4,
@@ -244,13 +255,13 @@
 						},
 						{
 							id: 1,
-							value: 'Russia',
-							name: 'russia',
+							value: 'russia',
+							name: 'Russia',
 						},
 						{
 							id: 3,
-							value: 'South Africa',
-							name: 'south_africa',
+							value: 'south_africa',
+							name: 'South Africa',
 						},
 						{
 							id: 4,
@@ -271,17 +282,17 @@
 						},
 						{
 							id: 1,
-							value: 'Portugal',
-							name: 'portugal',
+							value: 'portugal',
+							name: 'Portugal',
 						},
 						{
 							id: 3,
-							value: 'England',
-							name: 'england',
+							value: 'england',
+							name: 'England',
 						},
 						{
 							id: 4,
-							value: 'france ',
+							value: 'france',
 							name: 'France',
 						},
 					],
@@ -357,7 +368,7 @@
 						},
 						{
 							id: 3,
-							value: 'juventus ',
+							value: 'juventus',
 							name: 'Juventus ',
 						},
 						{
@@ -370,11 +381,16 @@
 			];
 
 			let answerList = [];
+
 			let question_html = '';
+
+			// Making question List
 			$.each(question_items, function (i, qsdata) {
 				let index = i + 1;
 				$('#start_quize').append(getQuestion(qsdata, index));
 			});
+
+			//Question making function
 			function getQuestion(qsdata, index) {
 				let optionsHtml = '';
 				$.each(qsdata.answer, function (key, option) {
@@ -394,27 +410,34 @@
 					</div>`;
 			}
 
+			// getting radio button value
 			function getRadioValue(parent, value) {
 				var selected = question_items.find( e => e.id === parent);
 				if (selected.correct_answer === value){
 					answerList[parent] = true
 				}
 			}
-
+			// After Finishing time, then call it
 			function onTimeFinish() {
 				var point = 0;
+				// calculation point
 				for (var i = 0; i < answerList.length; i++) {
 					if (answerList[i]){
 						point = point + 2;
 					}
 				}
+				// making expression text
 				var expression = point > 5 ? (point > 14 ? (point > 19 ? 'Perfect' : 'Well Done') : 'Nice Try') : 'Unlucky';
+				//setting bg color
 				var bg_color = point > 5 ? (point > 14 ? 'bg-success' : 'bg-warning') : 'bg-error';
 
+				//setting result text
 				$('#user_point').text(point);
 				$('#expression').text(expression+' ');
 				$('.result_card').addClass(bg_color);
 				$('#user_name').text($('#name').val());
+
+				// hiding question and showing result
 				$('.start_quize_wrap').hide();
 				$('.quiz_result').show();
 			}
