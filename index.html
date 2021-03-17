@@ -40,7 +40,7 @@
 				<button id="submit_quiz" class="submit_btn">Submit</button>
 			</div>
 			<div class="quiz_result">
-				<span class="result_card bg-success">Hasibur Rahman! You got x/20</span>
+				<span class="result_card"><span id="expression"></span> <span id="user_name"></span>! You got <span id="user_point"></span>/20</span>
 				<!-- <a href="index.html" class="submit_btn">Start again</a> -->
 			</div>
 		</div>
@@ -68,14 +68,13 @@
 				}
 			});
 			$('#submit_quiz').on('click', function () {
-				$('.quiz_result').show();
-				$('.start_quize_wrap').hide();
+				onTimeFinish()
 			});
 			function startTimer(duration, display) {
 				let timer = duration,
 					minutes,
 					seconds;
-				setInterval(function () {
+				var intervalINT = setInterval(function () {
 					minutes = parseInt(timer / 60, 10);
 					seconds = parseInt(timer % 60, 10);
 
@@ -85,8 +84,8 @@
 					display.textContent = minutes + ':' + seconds;
 
 					if (--timer < 0) {
-						$('.start_quize_wrap').hide();
-						$('.quiz_result').show();
+						onTimeFinish();
+						clearInterval(intervalINT)
 					}
 				}, 1000);
 			}
@@ -95,26 +94,26 @@
 				{
 					id: 1,
 					title: 'many minutes are in a full game of football?',
-					correct_answer: '90_minutes',
+					correct_answer: 'minutes90',
 					answer: [
 						{
 							id: 1,
-							value: '45_minutes',
+							value: 'minutes45',
 							name: '45 Minutes',
 						},
 						{
 							id: 2,
-							value: '60_minutes',
+							value: 'minutes60',
 							name: '60 Minutes',
 						},
 						{
 							id: 3,
-							value: '90_minutes',
+							value: 'minutes90',
 							name: '90 Minutes',
 						},
 						{
 							id: 4,
-							value: '100_minutes',
+							value: 'minutes100',
 							name: '100 Minutes',
 						},
 					],
@@ -122,7 +121,7 @@
 				{
 					id: 2,
 					title: 'How many teams are in the Premier League?',
-					correct_answer: '20_teams',
+					correct_answer: 'teams20',
 					answer: [
 						{
 							id: 1,
@@ -131,17 +130,17 @@
 						},
 						{
 							id: 2,
-							value: '22_teams',
+							value: 'teams20',
 							name: '22 Teams',
 						},
 						{
 							id: 3,
-							value: '24_teams',
+							value: 'teams24',
 							name: '24 Teams',
 						},
 						{
 							id: 4,
-							value: '26_teams',
+							value: 'teams26',
 							name: '26 Teams',
 						},
 					],
@@ -363,9 +362,7 @@
 					],
 				},
 			];
-			let answerList = [
-
-			]
+			let answerList = []
 			let question_html = '';
 			$.each(question_items, function (i, qsdata) {
 				let index = i + 1;
@@ -376,8 +373,8 @@
 				$.each(qsdata.answer, function (key, option) {
 					optionsHtml =
 						optionsHtml +
-						`<li>
-							<input type="radio" id="${option.value}" name="radio-group" />
+						`<li onclick="getRadioValue(${index}, '${option.value}')">
+							<input type="radio" id="${option.value}" name="${index}" />
 							<label for="${option.value}">${option.name}</label>
 						</li>`;
 				});
@@ -390,6 +387,31 @@
 						<ul class="quiz_ansr-list">${optionsHtml}</ul>
 					</div>`
 				);
+			}
+
+			function getRadioValue(parent, value) {
+				var selected = question_items.find( e => e.id === parent);
+				if (selected.correct_answer === value){
+					answerList[parent] = true
+				}
+			}
+
+			function onTimeFinish() {
+				var point = 0;
+				for (var i = 0; i < answerList.length; i++) {
+					if (answerList[i]){
+						point = point + 2;
+					}
+				}
+				var expression = point > 5 ? (point > 14 ? (point > 19 ? 'Perfect' : 'Well Done') : 'Nice Try') : 'Unlucky';
+				var bg_color = point > 5 ? (point > 14 ? 'bg-success' : 'bg-warning') : 'bg-error';
+
+				$('#user_point').text(point);
+				$('#expression').text(expression+' ');
+				$('.result_card').addClass(bg_color);
+				$('#user_name').text($('#name').val());
+				$('.start_quize_wrap').hide();
+				$('.quiz_result').show();
 			}
 		</script>
 	</body>
