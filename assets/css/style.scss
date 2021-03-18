@@ -43,7 +43,7 @@ body {
 .logo {
 	display: inline-block;
 	img {
-		height: 60px;
+		height: 80px;
 	}
 }
 .header_area {
@@ -237,6 +237,9 @@ body {
 .bg-error {
 	background: red;
 }
+.bg-gold {
+	background: gold;
+}
 .submit_btn {
 	min-height: 35px;
 	min-width: 120px;
@@ -319,14 +322,8 @@ body {
 		transform-origin: bottom;
 		h4 {
 			margin-bottom: 0;
-			a {
-				font-size: 18px;
-				color: #fff;
-				display: inline-block;
-				&:hover {
-					color: $themeColor;
-				}
-			}
+			font-size: 18px;
+			color: #fff;
 		}
 		span {
 			color: #fff;
@@ -388,4 +385,16 @@ body {
 #user_name {
 	display: inline-block;
 	margin-left: 5px;
+}
+.rouls_title {
+	width: 100%;
+	font-size: 16px;
+	margin-top: 20px;
+	margin-bottom: 4px;
+}
+.text-center {
+	text-align: center;
+	margin-top: 15px;
+}
+.back_btn {
 }
