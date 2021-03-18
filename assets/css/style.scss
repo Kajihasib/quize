@@ -231,6 +231,12 @@ body {
 .bg-success {
 	background: green;
 }
+.text-success {
+	color: green;
+}
+.text-error {
+	color: red;
+}
 .bg-warning {
 	background: #ff7101;
 }
@@ -397,4 +403,7 @@ body {
 	margin-top: 15px;
 }
 .back_btn {
+}
+.ansr_list {
+	line-height: 28px;
 }
